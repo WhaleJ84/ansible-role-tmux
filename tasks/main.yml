@@ -1,0 +1,47 @@
+---
+- name: INSTALL | Tmux
+  tags:
+  - install
+  block:
+  - name: INSTALL | Ensure tmux package is installed
+    become: True
+    ansible.builtin.package:
+      name: tmux
+      state: latest
+
+  - name: INSTALL | Ensure tmux config directory exists
+    ansible.builtin.file:
+      path: "{{ tmux_config_dir }}"
+      state: directory
+
+  - name: INSTALL | Ensure tmux config exists
+    changed_when: False
+    ansible.builtin.file:
+      path: "{{ tmux_config }}"
+      state: touch
+
+
+- name: CONFIGURE | Tmux
+  tags:
+  - configure
+  block:
+  - name: CONFIGURE | Unbind default prefix key and rebind new one
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      insertbefore: "BOF"
+      marker: "# {mark} Unbind default prefix key and rebind new one"
+      block: |
+        unbind C-b
+        set -g prefix C-t
+
+  - name: CONFIGURE | Enable mouse support
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Enable mouse support"
+      block: |
+        set -g mouse on
+
