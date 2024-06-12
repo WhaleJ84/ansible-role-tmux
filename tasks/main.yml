@@ -7,7 +7,7 @@
     become: True
     ansible.builtin.package:
       name: tmux
-      state: latest
+      state: present
 
   - name: INSTALL | Ensure tmux config directory exists
     ansible.builtin.file:
