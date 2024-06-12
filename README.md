@@ -16,6 +16,14 @@ roles:
     scm: git
 ```
 
+Role Variables
+--------------
+
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
+| tmux\_config\_dir | string | A path to where the tmux config files should be located | "$HOME" |
+| tmux\_config | string | A path to where the tmux config should be located | "{{ tmux\_config\_dir }}/tmux.config" |
+
 Example Playbook
 ----------------
 
@@ -26,5 +34,7 @@ This example playbook shows how I would use this role, with custom variables to 
 
   roles:
      - role: whalej84.tmux
+       vars:
+         tmux_config_dir: "{{ ansible_user_dir }}/.config/tmux"
        tags: [ tmux ]
 ```
