@@ -1,3 +1,4 @@
 ---
 tmux_config_dir: "{{ ansible_user_dir }}"
+tmux_share_dir: "{{ ansible_user_dir }}/.local/share/tmux"
 tmux_config: "{{ tmux_config_dir }}/tmux.conf"
