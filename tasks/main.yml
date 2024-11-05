@@ -45,3 +45,23 @@
       block: |
         set -g mouse on
 
+  - name: CONFIGURE | Rebind horizontal split-window key
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Rebind horizontal split-window key"
+      block: |
+        unbind '"'
+        bind-key v split-window -v
+
+  - name: CONFIGURE | Rebind vertical split-window key
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Rebind vertical split-window key"
+      block: |
+        unbind %
+        bind-key b split-window -h
+
