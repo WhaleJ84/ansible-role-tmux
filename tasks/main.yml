@@ -32,6 +32,16 @@
       mode: '0755'
       force: False
 
+  - name: INSTALL | Ensure tmux completion gets sourced in bashrc
+    ansible.builtin.blockinfile:
+      path: "{{ bashrc }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} tmux completion"
+      block: |
+        source {{ tmux_share_dir }}/completion
+    when: ansible_user_shell == "/bin/bash"
+
 
 - name: CONFIGURE | Tmux
   tags:
