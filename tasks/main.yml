@@ -75,7 +75,7 @@
       marker: "# {mark} Rebind horizontal split-window key"
       block: |
         unbind '"'
-        bind-key v split-window -v
+        bind-key v split-window -v -c "#{pane_current_path}"
 
   - name: CONFIGURE | Rebind vertical split-window key
     ansible.builtin.blockinfile:
@@ -85,5 +85,5 @@
       marker: "# {mark} Rebind vertical split-window key"
       block: |
         unbind %
-        bind-key b split-window -h
+        bind-key b split-window -h -c "#{pane_current_path}"
 
