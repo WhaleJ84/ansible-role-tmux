@@ -20,6 +20,18 @@
       path: "{{ tmux_config }}"
       state: touch
 
+  - name: INSTALL | Ensure tmux share directory exists
+    ansible.builtin.file:
+      path: "{{ tmux_share_dir }}"
+      state: directory
+
+  - name: INSTALL | Ensure tmux completion script exists
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux
+      dest: "{{ tmux_share_dir }}/completion"
+      mode: '0755'
+      force: False
+
 
 - name: CONFIGURE | Tmux
   tags:
