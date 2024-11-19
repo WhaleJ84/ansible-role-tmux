@@ -98,7 +98,7 @@
 
   - name: CONFIGURE | Ensure pane kill confirmation is removed
     ansible.builtin.blockinfile:
-      path: "{{ tmuc_config }}"
+      path: "{{ tmux_config }}"
       append_newline: True
       prepend_newline: True
       marker: "# {mark} Remove confirmation for kill confirmation"
