@@ -3,3 +3,5 @@ tmux_config_dir: "{{ ansible_user_dir }}"
 tmux_share_dir: "{{ ansible_user_dir }}/.local/share/tmux"
 tmux_config: "{{ tmux_config_dir }}/tmux.conf"
 bashrc: "{{ ansible_user_dir }}/.bashrc"
+SHELL:
+  RC: "{{ ansible_user_dir }}/.bashrc"
