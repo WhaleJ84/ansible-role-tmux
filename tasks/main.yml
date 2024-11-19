@@ -87,3 +87,11 @@
         unbind %
         bind-key b split-window -h -c "#{pane_current_path}"
 
+  - name: CONFIGURE | Ensure host displays user@hostname in status-bar
+    ansible.builtin.blockinfile:
+      path: "{{ SHELL.RC }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Display user@hostname in status-bar"
+      block: |
+        printf '\033]0;%s\007' "$USER@$HOSTNAME"
