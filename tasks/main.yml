@@ -89,7 +89,7 @@
 
   - name: CONFIGURE | Ensure host displays user@hostname in status-bar
     ansible.builtin.blockinfile:
-      path: "{{ SHELL.RC }}"
+      path: "{{ shell.rc }}"
       append_newline: True
       prepend_newline: True
       marker: "# {mark} Display user@hostname in status-bar"
