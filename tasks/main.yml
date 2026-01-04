@@ -105,3 +105,24 @@
       block: |
         bind-key C-x kill-pane
 
+  - name: CONFIGURE | Ensure vi mode is set globally
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Set vi mode globally"
+      block: |
+        set-window-option -g mode-keys vi
+
+  - name: CONFIGURE | Ensure vi begin copy mode is set
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Rebind vi copy begin selection"
+      block: |
+        unbind-key -T copy-mode C-Space
+        unbind-key -T copy-mode-vi Space
+        bind-key -T copy-mode-vi v send -X begin-selection
+        bind-key -T copy-mode-vi V send -X select-line
+
