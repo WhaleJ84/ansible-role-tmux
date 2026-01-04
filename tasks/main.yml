@@ -9,6 +9,13 @@
       name: tmux
       state: present
 
+  - name: INSTALL | Ensure tmux dependencies are installed
+    become: True
+    ansible.builtin.package:
+      name:
+        - xclip
+      state: present
+
   - name: INSTALL | Ensure tmux config directory exists
     ansible.builtin.file:
       path: "{{ tmux_config_dir }}"
@@ -125,4 +132,13 @@
         unbind-key -T copy-mode-vi Space
         bind-key -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi V send -X select-line
+
+  - name: CONFIGURE | Ensure vi confirm copy mode is set
+    ansible.builtin.blockinfile:
+      path: "{{ tmux_config }}"
+      append_newline: True
+      prepend_newline: True
+      marker: "# {mark} Rebind vi copy confirm selection"
+      block: |
+        bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
 
