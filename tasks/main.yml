@@ -75,7 +75,7 @@
       marker: "# {mark} Rebind horizontal split-window key"
       block: |
         unbind '"'
-        bind-key v split-window -v -c "#{pane_current_path}"
+        bind-key c-v split-window -v -c "#{pane_current_path}"
 
   - name: CONFIGURE | Rebind vertical split-window key
     ansible.builtin.blockinfile:
@@ -85,7 +85,7 @@
       marker: "# {mark} Rebind vertical split-window key"
       block: |
         unbind %
-        bind-key b split-window -h -c "#{pane_current_path}"
+        bind-key c-b split-window -h -c "#{pane_current_path}"
 
   - name: CONFIGURE | Ensure host displays user@hostname in status-bar
     ansible.builtin.blockinfile:
@@ -103,5 +103,5 @@
       prepend_newline: True
       marker: "# {mark} Remove confirmation for kill confirmation"
       block: |
-        bind-key x kill-pane
+        bind-key c-x kill-pane
 
